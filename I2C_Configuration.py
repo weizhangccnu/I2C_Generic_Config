@@ -31,13 +31,14 @@ def main():
     iss.open("COM3")
     iss.setup_i2c()
 
-    for i in range(len(Reg_Addr)):
+    for i in range(len(Reg_Addr)):                              # write data into i2c slave
         iss.i2c.write(I2C_Addr, Reg_Addr[i], Reg_Val[i])
         time.sleep(0.02)
 
     read_data = []
-    for i in range(len(Reg_Addr)):
+    for i in range(len(Reg_Addr)):                              # read data from i2c slave
         read_data += [iss.i2c.read(I2C_Addr, Reg_Addr[i], 1)]
+        time.sleep(0.02)
 
     ## compare write in data with read back data
     if Reg_Val == Reg_Val:
@@ -46,7 +47,7 @@ def main():
             winsound.Beep(freqency, duration)
             time.sleep(0.01)
     else:
-        print("Read back data didn't matche with write in data")
+        print("Read back data didn't matche with write in data")        #print reg_add, write data, read back data
         for i in range(len(Reg_Addr)):
             if Reg_Val[i] != read_data[i]:
                 print(Reg_Addr[i], Reg_Val[i], read_data[i])
