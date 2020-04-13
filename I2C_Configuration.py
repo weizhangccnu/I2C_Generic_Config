@@ -14,7 +14,9 @@ freqency = 1000
 duration = 200
 #-----------------------------------------------------------------------------------#
 def main():
-    config_filename = "GBS20_I2C_Config.txt"
+    config_filename = "GBS20_I2C_Config.txt"                    # need to change by users
+    COM_Port = "COM3"
+
     I2C_Addr = 0x22
     Reg_Addr = []
     Reg_Val = []
@@ -28,7 +30,7 @@ def main():
 
     # set usb-iss iic master device
     iss = UsbIss()
-    iss.open("COM3")
+    iss.open(COM_Port)
     iss.setup_i2c()
 
     for i in range(len(Reg_Addr)):                              # write data into i2c slave
@@ -43,7 +45,7 @@ def main():
     ## compare write in data with read back data
     if Reg_Val == Reg_Val:
         print("Read back data matched with write in data")
-        for i in range(3):                                      # if read back data matched with write in data, speaker will make a sound three times 
+        for i in range(3):                                      # if read back data matched with write in data, speaker will make a sound three times
             winsound.Beep(freqency, duration)
             time.sleep(0.01)
     else:
