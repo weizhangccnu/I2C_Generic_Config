@@ -43,11 +43,11 @@ def main():
     ## compare write in data with read back data
     if Reg_Val == Reg_Val:
         print("Read back data matched with write in data")
-        for i in range(3):
+        for i in range(3):                                      # if read back data matched with write in data, speaker will make a sound three times 
             winsound.Beep(freqency, duration)
             time.sleep(0.01)
     else:
-        print("Read back data didn't matche with write in data")        #print reg_add, write data, read back data
+        print("Read back data didn't match with write in data")        #print reg_add, write data, read back data
         for i in range(len(Reg_Addr)):
             if Reg_Val[i] != read_data[i]:
                 print(Reg_Addr[i], Reg_Val[i], read_data[i])
